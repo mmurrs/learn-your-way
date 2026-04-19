@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Deployment
+.vercel/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Personal launch notes (never commit)
+LAUNCH.md
+launch.md
+LAUNCH.*
+.launch/

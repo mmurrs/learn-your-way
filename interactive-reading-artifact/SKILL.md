@@ -29,6 +29,19 @@ If any are missing, ask — don't guess.
 
 ## Workflow
 
+### Step 0 (optional): Convert source to markdown
+
+If the source is a PDF, convert it to clean markdown before starting. Save as `source.md` alongside the output.
+
+Why: PDFs are expensive to parse via tools — page headers, footers, formatting artifacts, multi-pass reads. A clean markdown file cuts planning time by ~80% and total token usage by ~30-50%. It also becomes a reusable input if you regenerate the artifact later with a different learning style or depth setting.
+
+How:
+- Ask the agent: "Convert this PDF to clean markdown. Preserve section structure and heading hierarchy. Strip page numbers, headers, footers, and OCR artifacts."
+- Or use a tool like `pdf-to-markdown`, `marker`, or `docling`
+- Or paste the text manually and clean it up
+
+The markdown doesn't need to be perfect — just clean enough that the source text can be copied verbatim into SECTIONS without artifacts.
+
 ### Step 1: Plan before writing code
 
 Before generating any code, produce a plan (save it as `plan.md` alongside the output). Work through:
@@ -205,6 +218,7 @@ Areas where this skill can improve — contributions welcome:
 - **Alternative output modes** — Markdown, Astro, plain HTML? The React/Vite path is one option.
 - **Multi-source artifacts** — reading two related papers side by side with cross-references.
 - **Lighter-weight artifacts** — not every source needs 1000+ lines of React. When is a simpler format better?
+- **Source preprocessing** — Step 0 (PDF → markdown) is manual today. A dedicated preprocessing skill or script that handles common source formats (PDF, epub, web articles, transcripts) would streamline the pipeline and cut costs significantly.
 
 ## Additional resources
 

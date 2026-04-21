@@ -29,15 +29,21 @@ If any are missing, ask — don't guess.
 
 ## Workflow
 
-### Step 1: Think before writing code
+### Step 1: Plan before writing code
 
-Before generating any code, work through:
+Before generating any code, produce a plan (save it as `plan.md` alongside the output). Work through:
 
 1. What are the distinct **ideas** in this source? Not sections — ideas. Reorganize if needed.
 2. Where is the argument strongest? Where is it weakest or resting on unstated assumptions?
 3. What specific transfer points exist between these ideas and the reader's context?
+4. List every section with: id, title, whether it gets a diagram, questions, or transfer callout.
+5. For each diagram: what it shows and why it earns its place.
+6. For each question: the prompt and hint.
+7. For each transfer: which section and how it connects to the reader's domain.
 
-This is not optional. It produces meaningfully better chapter organization, more substantive callouts, and questions that actually push understanding.
+Share this plan with the user before generating code. This is not optional — it produces meaningfully better chapter organization, more substantive callouts, and questions that actually push understanding.
+
+For long sources (15+ pages), expect 1000+ line artifacts. Consider generating in phases rather than one pass.
 
 ### Step 2: Decide the structure
 
@@ -115,18 +121,23 @@ See [reference.md](reference.md) for the full Transfer component.
 
 ## Design constraints
 
-These are hard rules. Not stylistic preferences.
+### Hard rules (non-negotiable)
 
 1. **Source text goes in verbatim.** Do not rewrite, paraphrase, summarize, or "clean up" the source. Your additions (diagrams, callouts, quizzes) are appended, not substituted.
-2. **Reorganize around ideas, not sections** — but don't cut prose. If a reorganization would require cutting the author's words, keep the prose and add callouts that point across chapters instead.
-3. **Don't editorialize.** Present ideas, challenge them with callouts/questions, let the reader decide.
-4. **Quizzes should be uncomfortable.** They ask the reader to write, explain, or commit — not recall.
-5. **No filler paragraphs.** Every paragraph you add must carry a claim, explanation, or connection.
-6. **Colorblind-safe palette only.** Blues (#3d8bfd), yellows (#f0c060), teals (#40c8b0), purples (#a480cf). No red/green contrasts.
+2. **Don't editorialize.** Present ideas, challenge them with callouts/questions, let the reader decide.
+3. **Quizzes should be uncomfortable.** They ask the reader to write, explain, or commit — not recall.
+4. **Colorblind-safe palette only.** No red/green contrasts. Blues, yellows, teals, purples work.
+5. **Responsive.** Must work on mobile. Fluid scaling, 44px tap targets, no iOS auto-zoom.
 
-## Design tokens
+### Flexible (adapt to source and reader)
 
-Use these exact values for consistency with existing learn-your-way artifacts:
+- **Structure** — reorganize around ideas if it serves the reader, but don't cut prose. The component structure can flex per source.
+- **Visual style** — the default dark theme and design tokens below work well, but aren't mandatory. Match the tone to the source and reader.
+- **Filler** — every paragraph you add should carry a claim, explanation, or connection. But the bar is "does this help the reader" not "is this maximally dense."
+
+## Default design tokens
+
+These provide consistency with existing learn-your-way artifacts. Use them as a starting point — adjust if the source or reader calls for it.
 
 ```js
 const COLORS = {
@@ -165,6 +176,35 @@ The chapter progress bar at the top must look interactive, not decorative:
 ## Depth calibration
 
 If the output feels too long after first pass, re-prompt yourself with: "Compress further. I said survey — give me the 3 most important ideas only, everything else in a single 'Further Reading' appendix." Opus respects hard numeric limits (`Maximum N chapters`) better than soft guidance.
+
+## Scaffold contract (new project mode)
+
+When using `new project` mode, the scaffold at [scaffold/](scaffold/) provides:
+
+- `App.jsx` — wraps your `Reader` component in `<ApiKeyProvider>`, adds footer and API key modal
+- `ApiKeyProvider.jsx` — exports `useApiKey`, `requestFeedback`, `MissingApiKeyError`, `ApiKeyModal`
+- `main.jsx` — renders `<App />` into root
+
+Your `Reader.jsx` is the only file you generate. It must:
+- `export default function Reader()` as the default export
+- Import `useApiKey`, `requestFeedback`, `MissingApiKeyError` from `"./ApiKeyProvider.jsx"` if using AI feedback in QuestionBlock
+- Call `useMobileStyles()` inside Reader for responsive CSS
+
+Everything else (component structure, state management, how you render sections) is up to you.
+
+## Worked example
+
+The Turing reader at [examples/turing-reader/](../../examples/turing-reader/) is a complete worked example — 15 sections, 4 diagrams, 12 questions, 4 transfer callouts. Use it as a quality reference, not a template to copy rigidly. Each source will have different structure, different ideas, different transfer points.
+
+## Contributing
+
+Areas where this skill can improve — contributions welcome:
+
+- **Generalization beyond academic papers** — the current spec is tuned for argumentative prose (papers, essays). How does the skill adapt for technical docs, transcripts, or book chapters?
+- **Planning step formalization** — the plan.md checkpoint is valuable but loosely specified. What's the right structure for plans across different source types?
+- **Alternative output modes** — Markdown, Astro, plain HTML? The React/Vite path is one option.
+- **Multi-source artifacts** — reading two related papers side by side with cross-references.
+- **Lighter-weight artifacts** — not every source needs 1000+ lines of React. When is a simpler format better?
 
 ## Additional resources
 

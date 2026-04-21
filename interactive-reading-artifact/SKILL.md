@@ -60,6 +60,15 @@ For long sources (15+ pages), expect 1000+ line artifacts. Consider generating i
 
 **Cost optimization:** The planning step benefits from stronger reasoning (question design, transfer specificity, section reorganization). The code generation steps are more mechanical — copying verbatim text into JSX structures, following component patterns. If your tool supports model selection per step, use a stronger model for planning and a faster model for code gen. In testing, this cut total cost from ~$9 to ~$3.50 with no quality loss on the output artifact.
 
+**Estimated cost by approach (for a ~30 page source):**
+
+| Approach | Estimated cost | Quality notes |
+|---|---|---|
+| All stronger model | ~$9-10 | Best transfer callouts and question depth |
+| Hybrid (stronger plan, faster code gen) | ~$3-4 | Same quality — plan carries the reasoning, code gen is mechanical |
+| All faster model | ~$2 | 90-95% quality — transfers and questions slightly more generic |
+| Hybrid + PDF→md preprocessing | ~$2-3 | Best cost/quality ratio |
+
 ### Step 2: Decide the structure
 
 Based on depth:

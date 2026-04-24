@@ -218,7 +218,7 @@ Everything else (component structure, state management, how you render sections)
 
 ## Worked example
 
-The Turing reader at [examples/turing-reader/](../../examples/turing-reader/) is a complete worked example — 15 sections, 4 diagrams, 12 questions, 4 transfer callouts. Use it as a quality reference, not a template to copy rigidly. Each source will have different structure, different ideas, different transfer points.
+The Turing reader at [examples/turing-reader/](../../examples/turing-reader/) is a complete worked example covering Turing's full paper. Use it as a quality reference, not a template to copy rigidly. Each source will have different structure, different ideas, different transfer points.
 
 ## Contributing
 
